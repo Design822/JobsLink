@@ -2,7 +2,7 @@
 ![logo](https://github.com/user-attachments/assets/9783fd9c-c5d2-4307-af94-4833fcc7ca2e)
 
 
-Welcome to JobsLink – Your Gateway to Career Opportunities!
+**Welcome to JobsLink – Your Gateway to Career Opportunities!**
 
 At JobsLink, we understand that finding the right job can be a daunting task. That's why we’re dedicated to making your job search as seamless and efficient as possible. Our platform connects job seekers with a wide range of employment opportunities across various industries, helping you discover your dream job.
 
