@@ -211,15 +211,9 @@
                         <img src="${job.filename }">
                         <h3>${job.title}</h3>
                         <p>${job.position}</p>
-                        <p>${job.salary} AED Monthly</p>
+                        <p>${job.salary}</p>
                         <p>${job.gender}</p>
-                        <p>${job.time} </p>
-                        <p>${job.education_required}</p>
-                        <p>${job.job_summary}</p>
-                        <p>${job.job_description}</p>
-                        <p>${job.skills}</p>
-                        <p>${new Date(job.starting_date).toDateString()}</p>
-                        <p>${new Date(job.ending_date).toDateString()}</p>
+                        <p>Expiry Date:${new Date(job.ending_date).toDateString()} </p>
                         <p>${job.position}</p>
                         <button>View More</button>
                     `;

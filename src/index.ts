@@ -11,9 +11,10 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use("/css", express.static(path.join(__dirname, "../../css")));
-app.use("/js", express.static(path.join(__dirname, "../../js")));
-app.use("/images", express.static(path.join(__dirname, "../../images")));
+app.use(express.static('frontend'))
+app.use("/css", express.static(path.join(__dirname, "../frontend/css")));
+app.use("/js", express.static(path.join(__dirname, "../frontend/js")));
+app.use("/images", express.static(path.join(__dirname, "../frontend/images")));
 app.use("/image", express.static("public/"));
 app.use(
   cors({
@@ -28,7 +29,7 @@ app.use(
 );
 
 app.get("/", (req: any, res: any) => {
-  res.sendFile(path.join(__dirname, "../../home.html"));
+  res.sendFile(path.join(__dirname, "../frontend/home.html"));
 });
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);
