@@ -116,10 +116,11 @@
                                     jobItemTotal.innerHTML = `
                                         <img src="${job.filename}" alt="${job.title} logo"> <!-- Add alt attribute for accessibility -->
                                         <h3>${job.title}</h3>
-                                        <p>${job.position}</p>
-                                        <p>${job.location}</p> <!-- Ensure to use the correct field for the location -->
-                                        <p>${job.salary}</p>
-                                        <p>${new Date(job.ending_date).toDateString()}</p>
+                                        <p>Position: ${job.position}</p>
+                                        <p>Vacancies: ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
+                                        <p>Salary: ${job.salary}</p>
+                                        <p>Gender: ${job.gender}</p>
+                                        <p>Expiry Date: ${new Date(job.ending_date).toDateString()}</p>
                                         <button>View More</button>
                                     `;
     
