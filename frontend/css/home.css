@@ -41,6 +41,28 @@ body {
   }
 }
 
+.view-more-container {
+  display: flex; /* Use Flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin: 20px 0; /* Add some margin */
+  height: 100px; /* Set a height if needed for vertical centering */
+}
+
+.view-more-button {
+  background-color: #1674AA; /* Button background color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Add padding */
+  text-decoration: none; /* Remove underline */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.view-more-button:hover {
+  background-color: #a80404; /* Darker shade on hover */
+  color: white;
+  text-decoration: none;
+}
 /* Navbar */
 nav.nav-links {
   display: flex;
