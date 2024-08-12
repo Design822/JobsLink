@@ -253,95 +253,70 @@
         </div>
     </section>
     <br><br><br><br><br>
-    <section class="jobs">
+    <section class="jobs-feature">
         <h2>Feature Jobs</h2>
         <br><br>
-        <div class="job-list">
-            <div class="job-item">
-                <img src="images/image1.png" alt="Feaure Job 1">
-                <h3>Atlantis the Palm</h3>
-                <p>LT#3476584</p>
-                <p>DUBAI, United Arab Emirates</p>
-                <p>1000 AED Monthly</p>
-                <p>Thu Mar 14, 2024</p>
-                <p>Waiter</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image2.png" alt="Feaure Job 2">
-                <h3>Atlantis the Royal</h3>
-                <p>LT#3476584</p>
-                <p>DUBAI, United Arab Emirates</p>
-                <p>1000 AED Monthly</p>
-                <p>Thu Mar 15, 2024</p>
-                <p>F&B Attendent</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image3.png" alt="Feaure Job 3">
-                <h3>One & Only Royal Mirage</h3>
-                <p>LT#3476584</p>
-                <p>DUBAI, United Arab Emirates</p>
-                <p>1000 AED Monthly</p>
-                <p>Thu Mar 16, 2024</p>
-                <p>Head Chief</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image4.jpg" alt="Feaure Job 4">
-                <h3>Dunkin' Donuts</h3>
-                <p>LT#3443581</p>
-                <p>Kuwait</p>
-                <p>KD. 140 Monthly</p>
-                <p>Thu Mar 17, 2024</p>
-                <p>Waiter</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image1.png" alt="Feaure Job 5">
-                <h3>Atlantis the Palm</h3>
-                <p>LT#3476584</p>
-                <p>DUBAI, United Arab Emirates</p>
-                <p>1000 AED Monthly</p>
-                <p>Thu Mar 14, 2024</p>
-                <p>Waiter</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image2.png" alt="Feaure Job 6">
-                <h3>Atlantis the Royal</h3>
-                <p>LT#3476584</p>
-                <p>DUBAI, United Arab Emirates</p>
-                <p>1000 AED Monthly</p>
-                <p>Thu Mar 15, 2024</p>
-                <p>F&B Attendent</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image3.png" alt="Feaure Job 7">
-                <h3>One & Only Royal Mirage</h3>
-                <p>LT#3476584</p>
-                <p>DUBAI, United Arab Emirates</p>
-                <p>1000 AED Monthly</p>
-                <p>Thu Mar 16, 2024</p>
-                <p>Head Chief</p>
-                <button>View More</button>
-            </div>
-            <div class="job-item">
-                <img src="images/image4.jpg" alt="Feaure Job 8">
-                <h3>Dunkin' Donuts</h3>
-                <p>LT#3443581</p>
-                <p>Kuwait</p>
-                <p>KD. 140 Monthly</p>
-                <p>Thu Mar 17, 2024</p>
-                <p>Waiter</p>
-                <button>View More</button>
-            </div>
+        <div class="job-list-feature">
+            <script>
+                // Fetch job data from the API
+                fetch('/company/add?id=0')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(response => {
+                        console.log(response); // Inspect the data structure here
+    
+                        // Assuming response.data is the array
+                        const jobs = response.data; // Update this if your data structure is different
+                        console.log(jobs);
+    
+                        // Check if jobs is an array
+                        if (Array.isArray(jobs)) {
+                            // Get the first 8 jobs regardless of any criteria
+                            const featureJobs = jobs.slice(0, 8);
+    
+                            const jobListFeature = document.querySelector('.job-list-feature'); // Move this outside the loop for efficiency
+    
+                            // Clear existing content
+                            jobListFeature.innerHTML = '';
+    
+                            // Check if there are jobs available
+                            if (featureJobs.length > 0) {
+                                featureJobs.forEach(job => {
+                                    const jobItemFeature = document.createElement('div');
+                                    jobItemFeature.classList.add('job-item-feature');
+    
+                                    jobItemFeature.innerHTML = `
+                                        <img src="${job.filename}" alt="${job.title} logo"> <!-- Add alt attribute for accessibility -->
+                                        <h3>${job.title}</h3>
+                                        <p>Position: ${job.position}</p>
+                                        <p>Vacancies: ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
+                                        <p>Salary: ${job.salary}</p>
+                                        <p>Gender: ${job.gender}</p>
+                                        <p>Expiry Date: ${new Date(job.ending_date).toDateString()}</p>
+                                        <button>View More</button>
+                                    `;
+    
+                                    jobListFeature.appendChild(jobItemFeature); // Append job item to the job list
+                                });
+                            } else {
+                                jobListFeature.innerHTML = '<p>No feature jobs available.</p>'; // Handle case where no jobs are found
+                            }
+                        } else {
+                            console.error('Expected an array, but got:', jobs);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching job data:', error));
+            </script>
         </div>
         <div class="view-more-container">
             <a href="total_jobs.html" class="view-more-button">View More Jobs</a>
         </div>
     </section>
+    
     <br><br><br><br><br>
     <section class="articles">
         <h2>Important Articles</h2>
