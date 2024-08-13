@@ -289,6 +289,9 @@
                 <p>July 1, 2024</p>
             </div>
         </div>
+        <div class="view-more-container">
+            <a href="newsandupdate.html" class="view-more-button">View More Jobs</a>
+        </div>
     </section>    
     <div id="footer-placeholder"></div>
     <script>
@@ -301,6 +304,8 @@
                 .then(response => response.text())
                 .then(data => {
                     headerPlaceholder.innerHTML = data;
+                    // Initialize toggle button after header is loaded
+                    initToggleButton();
                 });
 
             fetch('footer.html')
@@ -308,31 +313,42 @@
                 .then(data => {
                     footerPlaceholder.innerHTML = data;
                 });
-        });
-    </script>
-    <script src="js/banner.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const toggleButton = document.querySelector(".toggle-button");
-            const navLinks = document.querySelector("nav.nav-links");
-    
-            toggleButton.addEventListener("click", () => {
-                navLinks.classList.toggle("show");
+
+            // Function to initialize toggle button
+            function initToggleButton() {
+                const toggleButton = document.querySelector(".toggle-button");
+                const navLinks = document.querySelector("nav.nav-links");
+
+                if (toggleButton && navLinks) {
+                    toggleButton.addEventListener("click", () => {
+                        navLinks.classList.toggle("show");
+                        console.log("Toggle button clicked. Nav links class is now:", navLinks.className);
+                    });
+                }
+            }
+
+            // Infinite scroll functionality
+            const scrollWrapper = document.getElementById('manpower-cards');
+            if (scrollWrapper) {
+                const cards = Array.from(scrollWrapper.children);
+                // Clone the cards to create an infinite scroll effect
+                cards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    scrollWrapper.appendChild(clone);
+                });
+            }
+
+            // Image card click functionality
+            const imgCard = document.querySelectorAll(".img-card");
+            imgCard.forEach(element => {
+                element.addEventListener("click", function(e) {
+                    imgCard.forEach(el => {
+                        el.classList.remove("active");
+                    });
+                    element.classList.add("active");
+                });
             });
         });
-    </script> 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        const scrollWrapper = document.getElementById('manpower-cards');
-        const cards = Array.from(scrollWrapper.children);
-        const totalCards = cards.length;
-
-        // Clone the cards to create an infinite scroll effect
-        cards.forEach(card => {
-            const clone = card.cloneNode(true);
-            scrollWrapper.appendChild(clone);
-        });
-    });
-    </script>   
+    </script>
 </body>
 </html>
