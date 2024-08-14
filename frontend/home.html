@@ -128,6 +128,12 @@
         <br><br>
             <div class="job-list">
                 <script>
+                    // Function to handle navigation
+                    function navigateToJobDetails(jobId) {
+                        const url = `job-details-page-job-seekers.html?id=${jobId}`;
+                        console.log('Navigating to:', url); // Log the URL
+                        location.href = url;
+                    }
                     // Fetch job data from the API
                     fetch('/company/add?id=0')
                         .then(response => {
@@ -170,7 +176,7 @@
                                             <p>Salary: ${job.salary}</p>
                                             <p>Gender: ${job.gender}</p>
                                             <p>Expiry Date: ${new Date(job.ending_date).toDateString()}</p>
-                                            <button>View More</button>
+                                            <button onclick="navigateToJobDetails(${job.id})">View More</button>
                                         `;
                 
                                         jobList.appendChild(jobItem); // Append job item to the job list
@@ -195,6 +201,13 @@
         <br><br>
         <div class="job-list-feature">
             <script>
+                // Function to handle navigation
+                function navigateToJobDetails(jobId) {
+                    const url = `job-details-page-job-seekers.html?id=${jobId}`;
+                    console.log('Navigating to:', url); // Log the URL
+                    location.href = url;
+                }
+            
                 // Fetch job data from the API
                 fetch('/company/add?id=0')
                     .then(response => {
@@ -205,27 +218,30 @@
                     })
                     .then(response => {
                         console.log(response); // Inspect the data structure here
-                
+            
                         // Assuming response.data is the array
                         const jobs = response.data; // Update this if your data structure is different
                         console.log(jobs);
-                
+            
                         // Check if jobs is an array
                         if (Array.isArray(jobs)) {
+                            // Sort jobs based on a date property (e.g., created_at, posting_date)
+                            jobs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // Sort in descending order
+            
                             // Get the first 8 jobs regardless of any criteria
                             const featureJobs = jobs.slice(0, 8);
-                
+            
                             const jobListFeature = document.querySelector('.job-list-feature'); // Move this outside the loop for efficiency
-                
+            
                             // Clear existing content
                             jobListFeature.innerHTML = '';
-                
+            
                             // Check if there are jobs available
                             if (featureJobs.length > 0) {
                                 featureJobs.forEach(job => {
                                     const jobItemFeature = document.createElement('div');
                                     jobItemFeature.classList.add('job-item-feature');
-
+            
                                     // Add an ID attribute for linking to job details
                                     jobItemFeature.innerHTML = `
                                         <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo">
@@ -237,16 +253,9 @@
                                         <p><strong>Expiry Date:</strong> ${new Date(job.ending_date).toDateString()}</p>
                                         <button onclick="navigateToJobDetails(${job.id})">View More</button>
                                     `;
-
+            
                                     jobListFeature.appendChild(jobItemFeature); // Append job item to the job list
                                 });
-
-                                // Function to handle navigation
-                                function navigateToJobDetails(jobId) {
-                                    const url = `job-details-page-job-seekers.html?id=${jobId}`;
-                                    console.log('Navigating to:', url); // Log the URL
-                                    location.href = url;
-                                }
                             } else {
                                 jobListFeature.innerHTML = '<p>No feature jobs available.</p>'; // Handle case where no jobs are found
                             }
@@ -256,7 +265,7 @@
                     })
                     .catch(error => console.error('Error fetching job data:', error));
             </script>           
-        </div>
+        </div>        
         <div class="view-more-container">
             <a href="total_jobs.html" class="view-more-button">View More Jobs</a>
         </div>        

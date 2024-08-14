@@ -27,6 +27,12 @@
         <br><br>
         <div class="job-list-total">
             <script>
+                // Function to handle navigation
+                function navigateToJobDetails(jobId) {
+                    const url = `job-details-page-job-seekers.html?id=${jobId}`;
+                    console.log('Navigating to:', url); // Log the URL
+                    location.href = url;
+                }
                 // Fetch job data from the API
                 fetch('/company/add?id=0')
                     .then(response => {
@@ -56,14 +62,14 @@
                                     jobItemTotal.classList.add('job-item-total');
     
                                     jobItemTotal.innerHTML = `
-                                        <img src="${job.filename}" alt="${job.title} logo"> <!-- Add alt attribute for accessibility -->
+                                        <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo">
                                         <h3>${job.title}</h3>
                                         <p>Position: ${job.position}</p>
                                         <p>Vacancies: ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
                                         <p>Salary: ${job.salary}</p>
                                         <p>Gender: ${job.gender}</p>
                                         <p>Expiry Date: ${new Date(job.ending_date).toDateString()}</p>
-                                        <button>View More</button>
+                                        <button onclick="navigateToJobDetails(${job.id})">View More</button>
                                     `;
     
                                     jobListTotal.appendChild(jobItemTotal); // Append job item to the job list

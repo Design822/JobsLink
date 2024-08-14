@@ -58,14 +58,13 @@
     </div>
 
     <script>
-        // Function to get the job ID from the URL
-function getJobIdFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('id');
-}
+        function getJobIdFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('id');
+        }
 
-// Fetch job details from the API
-function navigateToJobDetails(jobId) {
+        // Function to fetch job details
+        function fetchJobDetails(jobId) {
             fetch(`/company/add?id=${jobId}`)
                 .then(response => {
                     if (!response.ok) {
@@ -75,13 +74,16 @@ function navigateToJobDetails(jobId) {
                     }
                     return response.json();
                 })
-                .then(data => {
+                .then(response => {
+                    const data = response.data; // Access the nested data object
+
                     console.log(data); // Log the response data for inspection
 
                     // Populate the job details with the correct properties from the API response
                     document.getElementById('job-logo').src = data.filename || 'images/placeholder.png';
                     document.getElementById('job-position').innerText = data.position || 'N/A';
                     document.getElementById('job-vacancies').innerText = data.no_of_vacancies || 'N/A';
+                    document.getElementById('job-category').innerText = data.category_name || 'N/A'; // Use category_name instead of category_id
                     document.getElementById('job-salary').innerText = data.salary || 'N/A';
                     document.getElementById('job-type').innerText = data.time || 'N/A';
                     document.getElementById('job-starting-date').innerText = data.starting_date ? new Date(data.starting_date).toDateString() : 'N/A';
@@ -93,13 +95,13 @@ function navigateToJobDetails(jobId) {
                     document.getElementById('job-skills').innerText = data.skills || 'N/A';
                 })
                 .catch(error => console.error('Error fetching job details:', error));
-        }
+            }
 
         // Execute when the document is ready
         document.addEventListener("DOMContentLoaded", function() {
             const jobId = getJobIdFromURL();
             if (jobId) {
-                fetchJobDetails(jobId);
+                fetchJobDetails(jobId); // Call the fetch function
             } else {
                 console.error('No job ID found in URL');
             }
