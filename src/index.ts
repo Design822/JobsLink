@@ -11,7 +11,6 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(express.static('frontend'))
 app.use("/css", express.static(path.join(__dirname, "../frontend/css")));
 app.use("/js", express.static(path.join(__dirname, "../frontend/js")));
 app.use("/images", express.static(path.join(__dirname, "../frontend/images")));
@@ -31,6 +30,10 @@ app.use(
 app.get("/", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/home.html"));
 });
+app.get("/emp", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/employee_login.html"));
+});
+
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);
 app.use("/job_seeker", jobSeeker);

@@ -64,15 +64,50 @@
     <div class="login-container">
         <a href="job_seekers_home.html"><h2>Login as a Job Seekers</h2></a>
         <img src="images/login_seekers.png" alt="Job Seeker Illustration">
-        <form>
-            <input type="email" placeholder="Email address..." required>
-            <input type="password" placeholder="Password" required>
-            <a href="job_seekers_home.html"><button type="submit">Login</button></a>
+        <form id="jobSeekerLoginForm">
+            <input type="email" id="email_address" name="email_address" placeholder="Email address..." required>
+            <input type="password" id="password" name="password" placeholder="Password" required>  
+
+            <button type="submit">Login</button>
         </form>
         <a href="#">New here? <span>Register</span></a>
     </div>
     
     <br><br>
+    <script>
+        const form = document.getElementById('jobSeekerLoginForm');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = document.getElementById('email_address').value;
+            const password = document.getElementById('password').value;
+
+            const data = {
+                email_address: email,
+                password: password
+            };
+
+            const response = await fetch('/job_seeker/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                // Handle errors (e.g., display an error message to the user)
+                console.error('Network response was not ok:', response.statusText);
+                return;
+            }
+
+            const responseData = await response.json();
+
+            // Handle successful response (e.g., redirect the user or display a success message)
+            console.log('Login successful:', responseData);
+        });
+    </script>
     <footer class="footer-section">
         <div class="container">
             <div class="footer-cta pt-5 pb-5">

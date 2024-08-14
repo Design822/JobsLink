@@ -64,34 +64,34 @@
     
     <div class="job-seeker-register-container">
         <h2>Create your free Account !</h2>
-        <form action="#">
+        <form id="registerJobSeeker">
             <div class="form-group">
                 <label for="first-name">First name</label>
-                <input type="text" id="first-name" name="first-name" placeholder="Enter your First name">
+                <input type="text" id="first_name" name="first_name" placeholder="Enter your First name">
             </div>
             <div class="form-group">
                 <label for="last-name">Last name</label>
-                <input type="text" id="last-name" name="last-name" placeholder="Enter your Last name">
+                <input type="text" id="last_name" name="last_name" placeholder="Enter your Last name">
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your Email address...">
+                <input type="email" id="email_address" name="email_address" placeholder="Enter your Email address...">
             </div>
             <div class="form-group">
                 <label for="phone-number">Phone Number</label>
-                <input type="tel" id="phone-number" name="phone-number" placeholder="Enter your Phone Number">
+                <input type="tel" id="contact_number" name="contact_number" placeholder="Enter your Phone Number">
             </div>
             <div class="form-group">
                 <label for="profile-upload">Profile</label>
                 <label class="custom-file-upload">
-                    <input type="file" id="profile-upload" name="profile-upload">
+                    <input type="file" id="profile_pic" name="profile_pic">
                     Upload Profile
                 </label>
             </div>
             <div class="form-group">
                 <label for="cv-upload">Upload CV</label>
                 <label class="custom-file-upload">
-                    <input type="file" id="cv-upload" name="cv-upload">
+                    <input type="file" id="cv" name="cv">
                     Upload your CV
                 </label>
             </div>
@@ -108,7 +108,7 @@
                     <option value="other">Other</option>
                 </select>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="category">Category</label>
                 <select id="category" name="category">
                     <option value="" disabled selected>Category</option>
@@ -116,8 +116,8 @@
                     <option value="construction">Construction</option>
                     <option value="others">Others</option>
                 </select>
-            </div>
-            <div class="form-group">
+            </div> -->
+            <!-- <div class="form-group">
                 <label for="job-type">Job Type</label>
                 <select id="job-type" name="job-type">
                     <option value="" disabled selected>Job Type</option>
@@ -125,14 +125,14 @@
                     <option value="part-time">Part-Time</option>
                     <option value="contract">Contract</option>
                 </select>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password">
+                <input type="password" id="conformPassword" name="conformPassword" placeholder="Confirm Password">
             </div>
             <div class="notice">
                 <p>Note: Please make sure that all your information is accurate before proceeding to register.</p>
@@ -143,6 +143,25 @@
                 Already Registered as a Job Seeker? <a href="#">Login Here</a>
             </div>
         </form>
+        <script>
+            const form = document.getElementById('registerJobSeeker');
+            form.addEventListener('submit', async(event)=>{
+                event.preventDefault();
+                const formData = new FormData(form);
+                
+                const response = await fetch('/job_seeker/register', {
+                    method: 'POST',
+                    body:formData   
+                })
+                if(!response.ok){
+                    console.error('Unable to register due to:', response.statusText);
+                    return;
+                }
+                const responseData = await response.json();
+
+                console.log('Register sucessfully', responseData)
+            })
+        </script>
     </div>
     <br><br>
     <footer class="footer-section">

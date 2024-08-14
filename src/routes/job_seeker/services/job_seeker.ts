@@ -141,20 +141,20 @@ const registerJobSeeker = async (
       contact_number,
       email_address,
       gender,
-      post,
+      // post,
       conformPassword,
       password,
     } = req.body;
     const profilePic = req.files.profile_pic.map((file: any) => file.filename);
     const cv = req.files.cv.map((file: any) => file.filename);
 
-    if (!post) {
-      return res
-        .status(400)
-        .json(
-          responder(false, `Please write which postion you are applying for`)
-        );
-    }
+    // if (!post) {
+    //   return res
+    //     .status(400)
+    //     .json(
+    //       responder(false, `Please write which postion you are applying for`)
+    //     );
+    // }
     if (!gender) {
       return res.status(400).json(responder(false, `Please select gender`));
     }
@@ -208,7 +208,7 @@ const registerJobSeeker = async (
         last_name,
         contact_number,
         address,
-        post,
+        // post,
         gender,
         email_address,
         password: hashedPassword,
@@ -235,31 +235,29 @@ const loginJobSeeker = async (
 ) => {
   try {
     const { email_address, password } = req.body;
-    await db("job_seeker")
-      .where({ email_address })
+    const user = await db("job_seeker")
       .first()
-      .then(async (user) => {
-        if (!user) {
-          return res
-            .status(401)
-            .json(responder(false, `This email hasn't been register`));
-        } else {
-          const passwordMatch = await bcrypt.compare(password, user.password);
-          if (!passwordMatch) {
-            return res
-              .status(401)
-              .json(
-                responder(false, `Your password doesn't match please try again`)
-              );
-          } else {
-            const secret = process.env.SECRET!;
-            const token = jwt.sign({ user, role: "job_seeker" }, secret, {
-              expiresIn: "1D",
-            });
-            res.status(202).json({ messege: "Login sucessfully", token });
-          }
-        }
-      });
+      .where("email_address", email_address);
+    if (!user) {
+      return res
+        .status(401)
+        .json(responder(false, `This email hasn't been register`));
+    } else {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) {
+        return res
+          .status(401)
+          .json(
+            responder(false, `Your password doesn't match please try again`)
+          );
+      } else {
+        const secret = process.env.SECRET!;
+        const token = jwt.sign({ user, role: "job_seeker" }, secret, {
+          expiresIn: "1D",
+        });
+        res.status(202).json({ messege: "Login sucessfully", token });
+      }
+    }
   } catch (error) {
     errorLog(error, res, next);
   }
