@@ -29,7 +29,7 @@
             <script>
                 // Function to handle navigation
                 function navigateToJobDetails(jobId) {
-                    const url = `job-details-page-job-seekers.html?id=${jobId}`;
+                    const url = `/jobs_details?id=${jobId}`;
                     console.log('Navigating to:', url); // Log the URL
                     location.href = url;
                 }
@@ -93,7 +93,7 @@
             const headerPlaceholder = document.getElementById('header-placeholder');
             const footerPlaceholder = document.getElementById('footer-placeholder');
 
-            fetch('header.html')
+            fetch('/header')
                 .then(response => response.text())
                 .then(data => {
                     headerPlaceholder.innerHTML = data;
@@ -101,7 +101,7 @@
                     initToggleButton();
                 });
 
-            fetch('footer.html')
+            fetch('/footer')
                 .then(response => response.text())
                 .then(data => {
                     footerPlaceholder.innerHTML = data;

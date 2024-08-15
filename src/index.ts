@@ -11,7 +11,6 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(express.static('frontend'))
 app.use("/css", express.static(path.join(__dirname, "../frontend/css")));
 app.use("/js", express.static(path.join(__dirname, "../frontend/js")));
 app.use("/images", express.static(path.join(__dirname, "../frontend/images")));
@@ -31,6 +30,30 @@ app.use(
 app.get("/", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/home.html"));
 });
+app.get("/employee_reg", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/employee_reg.html"));
+});
+// Serve the employee login page
+app.get("/employee_login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/employee_login.html"));
+});
+// Serve the header
+app.get("/header", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/header.html"));
+});
+// Serve the header
+app.get("/footer", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/footer.html"));
+});
+// Serve the header
+app.get("/all_jobs", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/total_jobs.html"));
+});
+// Serve the header
+app.get("/jobs_details", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/job-details-page-job-seekers.html"));
+});
+
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);
 app.use("/job_seeker", jobSeeker);
