@@ -171,11 +171,12 @@
                                         jobItem.innerHTML = `
                                             <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo"> <!-- Add alt attribute for accessibility -->
                                             <h3>${job.title}</h3>
-                                            <p>Position: ${job.position}</p>
-                                            <p>Vacancies: ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
-                                            <p>Salary: ${job.salary}</p>
-                                            <p>Gender: ${job.gender}</p>
-                                            <p>Expiry Date: ${new Date(job.ending_date).toDateString()}</p>
+                                            <p><strong>Position:</strong> ${job.position}</p>
+                                            <p><strong>Category: </strong>${job.category_name}</p>
+                                            <p><strong>Vacancies:</strong> ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
+                                            <p><strong>Salary:</strong> ${job.salary}</p>
+                                            <p><strong>Gender:</strong> ${job.gender}</p>
+                                            <p><strong>Expiry Date:</strong> ${new Date(job.ending_date).toDateString()}</p>
                                             <button onclick="navigateToJobDetails(${job.id})">View More</button>
                                         `;
                 
@@ -192,7 +193,7 @@
                 </script>
             </div>
         <div class="view-more-container">
-            <a href="total_jobs.html" class="view-more-button">View More Jobs</a>
+            <a href="/all_jobs" class="view-more-button">View More Jobs</a>
         </div>
     </section>
     <br><br><br><br><br>
@@ -247,6 +248,7 @@
                                         <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo">
                                         <h3>${job.title}</h3>
                                         <p><strong>Position:</strong> ${job.position}</p>
+                                        <p><strong>Category:</strong> ${job.category_name}</p>
                                         <p><strong>Vacancies:</strong> ${job.no_of_vacancies}</p>
                                         <p><strong>Salary:</strong> ${job.salary}</p>
                                         <p><strong>Gender:</strong> ${job.gender}</p>
@@ -267,7 +269,7 @@
             </script>           
         </div>        
         <div class="view-more-container">
-            <a href="total_jobs.html" class="view-more-button">View More Jobs</a>
+            <a href="/all_jobs" class="view-more-button">View More Jobs</a>
         </div>        
     </section>
     

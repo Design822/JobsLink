@@ -2,19 +2,58 @@
 
 
     <br><br><br><br><br><br>
-    <h2 class="page-heading">All Types of Jobs</h2>
+    <h2 class="page-heading">Search your Dream Jobs</h2>
     <div class="search-categories">
         <div class="dropdown">
             <a href="#" class="dropdown-toggle">Categories</a>
-            <div class="dropdown-content">
-                <a href="#">All</a>
-                <a href="#">Engineering</a>
-                <a href="#">Healthcare</a>
-                <a href="#">Finance</a>
-                <a href="#">Technology</a>
-                <a href="#">Education</a>
+            <div class="dropdown-content" id="category-dropdown-content">
+                <!-- Categories will be dynamically populated here -->
             </div>
         </div>
+        
+        <script>
+            // Fetch and populate categories
+            async function fetchCategories() {
+                try {
+                    const response = await fetch('/category'); // Adjust the URL if necessary
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log('Fetched categories:', data); // Log the entire fetched data for debugging
+
+                    if (data.success) {
+                        const categories = data.data; // Assuming your API response has this structure
+                        const dropdownContent = document.getElementById('category-dropdown-content');
+                        dropdownContent.innerHTML = ''; // Clear existing items
+
+                        // Create dropdown items
+                        categories.forEach(category => {
+                            const categoryLink = document.createElement('a');
+                            categoryLink.href = '#'; // Update with actual link if needed
+                            categoryLink.innerText = category.category_name; // Assuming the category object has this property
+                            categoryLink.onclick = (e) => {
+                                e.preventDefault(); // Prevent default anchor behavior
+                                console.log(`Selected category: ${category.category_name}`); // Handle category selection here
+                                fetchJobs(category.id); // Fetch jobs based on the selected category
+                            };
+                            dropdownContent.appendChild(categoryLink);
+                        });
+                    } else {
+                        console.error('Failed to fetch categories:', data.message);
+                    }
+                } catch (error) {
+                    console.error('Error fetching categories:', error.message); // Log the error message
+                }
+            }
+
+        
+            // Call the fetchCategories function on page load
+            document.addEventListener("DOMContentLoaded", fetchCategories);
+        </script>
+        
         <div class="search-box">
             <input type="text" placeholder="Search for jobs, companies, keywords...">
             <button type="submit"><i class="fas fa-search"></i></button>
@@ -23,7 +62,6 @@
     
      
     <section class="jobs-total">
-        <h2>Total Jobs</h2>
         <br><br>
         <div class="job-list-total">
             <script>
@@ -64,11 +102,12 @@
                                     jobItemTotal.innerHTML = `
                                         <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo">
                                         <h3>${job.title}</h3>
-                                        <p>Position: ${job.position}</p>
-                                        <p>Vacancies: ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
-                                        <p>Salary: ${job.salary}</p>
-                                        <p>Gender: ${job.gender}</p>
-                                        <p>Expiry Date: ${new Date(job.ending_date).toDateString()}</p>
+                                        <p><strong>Position: </strong>${job.position}</p>
+                                        <p><strong>Category:</strong> ${job.category_name}</p>
+                                        <p><strong>Vacancies:</strong> ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
+                                        <p><strong>Salary:</strong> ${job.salary}</p>
+                                        <p><strong>Gender:</strong> ${job.gender}</p>
+                                        <p><strong>Expiry Date:</strong> ${new Date(job.ending_date).toDateString()}</p>
                                         <button onclick="navigateToJobDetails(${job.id})">View More</button>
                                     `;
     
