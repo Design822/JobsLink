@@ -33,6 +33,11 @@ app.get("/", (req: any, res: any) => {
 app.get("/emp", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/employee_reg.html"));
 });
+// Serve the employee login page
+app.get("/employee_login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/employee_login.html"));
+});
+
 
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);
