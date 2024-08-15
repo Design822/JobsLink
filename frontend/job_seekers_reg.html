@@ -23,16 +23,20 @@
             <div class="form-group">
                 <label for="profile-upload">Profile</label>
                 <label class="custom-file-upload">
-                    <input type="file" id="profile_pic" name="profile_pic">
+                    <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
                     Upload Profile
                 </label>
+                <img id="profile-preview" src="" alt="Profile Preview" style="display:none; margin-top: 10px; width: 100px; height: auto;"/>
             </div>
             <div class="form-group">
                 <label for="cv-upload">Upload CV</label>
                 <label class="custom-file-upload">
-                    <input type="file" id="cv" name="cv">
+                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
                     Upload your CV
                 </label>
+                <div id="cv-preview" style="display:none; margin-top: 10px;">
+                    <a id="cv-link" href="" target="_blank">View CV</a>
+                </div>
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
@@ -111,34 +115,45 @@
         document.addEventListener("DOMContentLoaded", function() {
             const headerPlaceholder = document.getElementById('header-placeholder');
             const footerPlaceholder = document.getElementById('footer-placeholder');
-
-            fetch('/header')
-                .then(response => response.text())
-                .then(data => {
-                    headerPlaceholder.innerHTML = data;
-                    // Initialize toggle button after header is loaded
-                    initToggleButton();
-                });
-
-            fetch('/footer')
-                .then(response => response.text())
-                .then(data => {
-                    footerPlaceholder.innerHTML = data;
-                });
-
+    
+            // Load header
+            loadComponent('/header', headerPlaceholder)
+                .then(() => initToggleButton()) // Initialize toggle button after header is loaded
+                .catch(error => console.error('Error loading header:', error));
+    
+            // Load footer
+            loadComponent('/footer', footerPlaceholder)
+                .catch(error => console.error('Error loading footer:', error));
+    
+            // Function to load components (header/footer)
+            function loadComponent(url, placeholder) {
+                return fetch(url)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        placeholder.innerHTML = data;
+                    });
+            }
+    
             // Function to initialize toggle button
             function initToggleButton() {
                 const toggleButton = document.querySelector(".toggle-button");
                 const navLinks = document.querySelector("nav.nav-links");
-
+    
                 if (toggleButton && navLinks) {
                     toggleButton.addEventListener("click", () => {
                         navLinks.classList.toggle("show");
                         console.log("Toggle button clicked. Nav links class is now:", navLinks.className);
                     });
+                } else {
+                    console.warn("Toggle button or nav links not found.");
                 }
             }
-
+    
             // Infinite scroll functionality
             const scrollWrapper = document.getElementById('manpower-cards');
             if (scrollWrapper) {
@@ -149,18 +164,55 @@
                     scrollWrapper.appendChild(clone);
                 });
             }
-
+    
             // Image card click functionality
             const imgCard = document.querySelectorAll(".img-card");
             imgCard.forEach(element => {
-                element.addEventListener("click", function(e) {
+                element.addEventListener("click", function() {
                     imgCard.forEach(el => {
                         el.classList.remove("active");
                     });
                     element.classList.add("active");
                 });
             });
+    
+            // Preview for Profile Image
+            document.getElementById('profile_pic').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                const preview = document.getElementById('profile-preview');
+                
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        preview.src = e.target.result; // Set the source of the image to the result of the FileReader
+                        preview.style.display = 'block'; // Show the image
+                    }
+                    reader.readAsDataURL(file); // Read the file as a Data URL
+                } else {
+                    preview.src = ''; // Reset the preview if no file is selected
+                    preview.style.display = 'none';
+                }
+            });
+    
+            // Preview for CV
+            document.getElementById('cv').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                const cvLink = document.getElementById('cv-link');
+                const cvPreview = document.getElementById('cv-preview');
+    
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        cvLink.href = e.target.result; // Set the href of the link to the result of the FileReader
+                        cvPreview.style.display = 'block'; // Show the CV link
+                        cvLink.innerText = file.name; // Show the name of the uploaded CV
+                    }
+                    reader.readAsDataURL(file); // Read the file as a Data URL
+                } else {
+                    cvLink.href = ''; // Reset the link if no file is selected
+                    cvPreview.style.display = 'none';
+                }
+            });
         });
     </script>
-</body>
-</html>
+    
