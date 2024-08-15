@@ -31,7 +31,7 @@ app.get("/", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/home.html"));
 });
 app.get("/emp", (req: any, res: any) => {
-  res.sendFile(path.join(__dirname, "../frontend/employee_login.html"));
+  res.sendFile(path.join(__dirname, "../frontend/employee_reg.html"));
 });
 
 app.use("/category", categoryRoute);
