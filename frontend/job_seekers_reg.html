@@ -1,57 +1,92 @@
 <div id="header-placeholder"></div>
-    <br><br><br><br><br><br><br><br>
-    
-    <div class="job-seeker-register-container">
-        <h2>Create your free Account !</h2>
-        <form id="registerJobSeeker">
-            <div class="form-group">
-                <label for="first-name">First name</label>
-                <input type="text" id="first_name" name="first_name" placeholder="Enter your First name">
-            </div>
-            <div class="form-group">
-                <label for="last-name">Last name</label>
-                <input type="text" id="last_name" name="last_name" placeholder="Enter your Last name">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" id="email_address" name="email_address" placeholder="Enter your Email address...">
-            </div>
-            <div class="form-group">
-                <label for="phone-number">Phone Number</label>
-                <input type="tel" id="contact_number" name="contact_number" placeholder="Enter your Phone Number">
-            </div>
-            <div class="form-group">
-                <label for="profile-upload">Profile</label>
-                <label class="custom-file-upload">
-                    <input type="file" id="profile_pic" name="profile_pic" accept="image/*">
-                    Upload Profile
-                </label>
-                <img id="profile-preview" src="" alt="Profile Preview" style="display:none; margin-top: 10px; width: 100px; height: auto;"/>
-            </div>
-            <div class="form-group">
-                <label for="cv-upload">Upload CV</label>
-                <label class="custom-file-upload">
-                    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx">
-                    Upload your CV
-                </label>
-                <div id="cv-preview" style="display:none; margin-top: 10px;">
-                    <a id="cv-link" href="" target="_blank">View CV</a>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" id="address" name="address" placeholder="Enter your Address">
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender">
-                    <option value="" disabled selected>Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            <!-- <div class="form-group">
+<br /><br /><br /><br /><br /><br /><br /><br />
+
+<div class="job-seeker-register-container">
+  <h2>Create your free Account !</h2>
+  <form id="registerJobSeeker">
+    <div class="form-group">
+      <label for="first-name">First name</label>
+      <input
+        type="text"
+        id="first_name"
+        name="first_name"
+        placeholder="Enter your First name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="last-name">Last name</label>
+      <input
+        type="text"
+        id="last_name"
+        name="last_name"
+        placeholder="Enter your Last name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input
+        type="email"
+        id="email_address"
+        name="email_address"
+        placeholder="Enter your Email address..."
+      />
+    </div>
+    <div class="form-group">
+      <label for="phone-number">Phone Number</label>
+      <input
+        type="tel"
+        id="contact_number"
+        name="contact_number"
+        placeholder="Enter your Phone Number"
+      />
+    </div>
+    <div class="form-group">
+      <label for="profile-upload">Profile</label>
+      <label class="custom-file-upload">
+        <input
+          type="file"
+          id="profile_pic"
+          name="profile_pic"
+          accept="image/*"
+        />
+        Upload Profile
+      </label>
+      <img
+        id="profile-preview"
+        src=""
+        alt="Profile Preview"
+        style="display: none; margin-top: 10px; width: 100px; height: auto"
+      />
+    </div>
+    <div class="form-group">
+      <label for="cv-upload">Upload CV</label>
+      <label class="custom-file-upload">
+        <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" />
+        Upload your CV
+      </label>
+      <div id="cv-preview" style="display: none; margin-top: 10px">
+        <a id="cv-link" href="" target="_blank">View CV</a>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        type="text"
+        id="address"
+        name="address"
+        placeholder="Enter your Address"
+      />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender">
+        <option value="" disabled selected>Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <!-- <div class="form-group">
                 <label for="category">Category</label>
                 <select id="category" name="category">
                     <option value="" disabled selected>Category</option>
@@ -60,7 +95,7 @@
                     <option value="others">Others</option>
                 </select>
             </div> -->
-            <!-- <div class="form-group">
+    <!-- <div class="form-group">
                 <label for="job-type">Job Type</label>
                 <select id="job-type" name="job-type">
                     <option value="" disabled selected>Job Type</option>
@@ -69,150 +104,169 @@
                     <option value="contract">Contract</option>
                 </select>
             </div> -->
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="conformPassword" name="conformPassword" placeholder="Confirm Password">
-            </div>
-            <div class="notice">
-                <p>Note: Please make sure that all your information is accurate before proceeding to register.</p>
-            </div>
-            <br><br>
-            <a href="#"><button type="submit" class="btn">Register as Job Seeker</button></a>
-            <div class="login-link">
-                Already Registered as a Job Seeker? <a href="/job_seekers_login">Login Here</a>
-            </div>
-        </form>
-        <script>
-            const form = document.getElementById('registerJobSeeker');
-            form.addEventListener('submit', async(event)=>{
-                event.preventDefault();
-                const formData = new FormData(form);
-                
-                const response = await fetch('/job_seeker/register', {
-                    method: 'POST',
-                    body:formData   
-                })
-                if(!response.ok){
-                    console.error('Unable to register due to:', response.statusText);
-                    return;
-                }
-                const responseData = await response.json();
-                console.log('Register sucessfully', responseData)
-
-                // Redirect to employee_login.html after successful registration
-                window.location.href = '/job_seekers_login';
-            })
-        </script>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+      />
     </div>
-    <br><br>
-    <div id="footer-placeholder"></div>
-    <script>
-        // Load header and footer
-        document.addEventListener("DOMContentLoaded", function() {
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            const footerPlaceholder = document.getElementById('footer-placeholder');
-    
-            // Load header
-            loadComponent('/header', headerPlaceholder)
-                .then(() => initToggleButton()) // Initialize toggle button after header is loaded
-                .catch(error => console.error('Error loading header:', error));
-    
-            // Load footer
-            loadComponent('/footer', footerPlaceholder)
-                .catch(error => console.error('Error loading footer:', error));
-    
-            // Function to load components (header/footer)
-            function loadComponent(url, placeholder) {
-                return fetch(url)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.text();
-                    })
-                    .then(data => {
-                        placeholder.innerHTML = data;
-                    });
-            }
-    
-            // Function to initialize toggle button
-            function initToggleButton() {
-                const toggleButton = document.querySelector(".toggle-button");
-                const navLinks = document.querySelector("nav.nav-links");
-    
-                if (toggleButton && navLinks) {
-                    toggleButton.addEventListener("click", () => {
-                        navLinks.classList.toggle("show");
-                        console.log("Toggle button clicked. Nav links class is now:", navLinks.className);
-                    });
-                } else {
-                    console.warn("Toggle button or nav links not found.");
-                }
-            }
-    
-            // Infinite scroll functionality
-            const scrollWrapper = document.getElementById('manpower-cards');
-            if (scrollWrapper) {
-                const cards = Array.from(scrollWrapper.children);
-                // Clone the cards to create an infinite scroll effect
-                cards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    scrollWrapper.appendChild(clone);
-                });
-            }
-    
-            // Image card click functionality
-            const imgCard = document.querySelectorAll(".img-card");
-            imgCard.forEach(element => {
-                element.addEventListener("click", function() {
-                    imgCard.forEach(el => {
-                        el.classList.remove("active");
-                    });
-                    element.classList.add("active");
-                });
-            });
-    
-            // Preview for Profile Image
-            document.getElementById('profile_pic').addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                const preview = document.getElementById('profile-preview');
-                
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.src = e.target.result; // Set the source of the image to the result of the FileReader
-                        preview.style.display = 'block'; // Show the image
-                    }
-                    reader.readAsDataURL(file); // Read the file as a Data URL
-                } else {
-                    preview.src = ''; // Reset the preview if no file is selected
-                    preview.style.display = 'none';
-                }
-            });
-    
-            // Preview for CV
-            document.getElementById('cv').addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                const cvLink = document.getElementById('cv-link');
-                const cvPreview = document.getElementById('cv-preview');
-    
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        cvLink.href = e.target.result; // Set the href of the link to the result of the FileReader
-                        cvPreview.style.display = 'block'; // Show the CV link
-                        cvLink.innerText = file.name; // Show the name of the uploaded CV
-                    }
-                    reader.readAsDataURL(file); // Read the file as a Data URL
-                } else {
-                    cvLink.href = ''; // Reset the link if no file is selected
-                    cvPreview.style.display = 'none';
-                }
-            });
+    <div class="form-group">
+      <label for="confirm-password">Confirm Password</label>
+      <input
+        type="password"
+        id="conformPassword"
+        name="conformPassword"
+        placeholder="Confirm Password"
+      />
+    </div>
+    <div class="notice">
+      <p>
+        Note: Please make sure that all your information is accurate before
+        proceeding to register.
+      </p>
+    </div>
+    <br /><br />
+    <a><button type="submit" class="btn">Register as Job Seeker</button></a>
+    <div class="login-link">
+      Already Registered as a Job Seeker?
+      <a href="/job_seekers_login">Login Here</a>
+    </div>
+  </form>
+  <script>
+    const form = document.getElementById("registerJobSeeker");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+
+      const response = await fetch("/job_seeker/register", {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        console.error("Unable to register due to:", response.statusText);
+        return;
+      }
+      const responseData = await response.json();
+      console.log("Register sucessfully", responseData);
+
+      // Redirect to employee_login.html after successful registration
+      window.location.href = "/job_seekers_login";
+    });
+  </script>
+</div>
+<br /><br />
+<div id="footer-placeholder"></div>
+<script>
+  // Load header and footer
+  document.addEventListener("DOMContentLoaded", function () {
+    const headerPlaceholder = document.getElementById("header-placeholder");
+    const footerPlaceholder = document.getElementById("footer-placeholder");
+
+    // Load header
+    loadComponent("/header", headerPlaceholder)
+      .then(() => initToggleButton()) // Initialize toggle button after header is loaded
+      .catch((error) => console.error("Error loading header:", error));
+
+    // Load footer
+    loadComponent("/footer", footerPlaceholder).catch((error) =>
+      console.error("Error loading footer:", error)
+    );
+
+    // Function to load components (header/footer)
+    function loadComponent(url, placeholder) {
+      return fetch(url)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then((data) => {
+          placeholder.innerHTML = data;
         });
-    </script>
-    
+    }
+
+    // Function to initialize toggle button
+    function initToggleButton() {
+      const toggleButton = document.querySelector(".toggle-button");
+      const navLinks = document.querySelector("nav.nav-links");
+
+      if (toggleButton && navLinks) {
+        toggleButton.addEventListener("click", () => {
+          navLinks.classList.toggle("show");
+          console.log(
+            "Toggle button clicked. Nav links class is now:",
+            navLinks.className
+          );
+        });
+      } else {
+        console.warn("Toggle button or nav links not found.");
+      }
+    }
+
+    // Infinite scroll functionality
+    const scrollWrapper = document.getElementById("manpower-cards");
+    if (scrollWrapper) {
+      const cards = Array.from(scrollWrapper.children);
+      // Clone the cards to create an infinite scroll effect
+      cards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        scrollWrapper.appendChild(clone);
+      });
+    }
+
+    // Image card click functionality
+    const imgCard = document.querySelectorAll(".img-card");
+    imgCard.forEach((element) => {
+      element.addEventListener("click", function () {
+        imgCard.forEach((el) => {
+          el.classList.remove("active");
+        });
+        element.classList.add("active");
+      });
+    });
+
+    // Preview for Profile Image
+    document
+      .getElementById("profile_pic")
+      .addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById("profile-preview");
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            preview.src = e.target.result; // Set the source of the image to the result of the FileReader
+            preview.style.display = "block"; // Show the image
+          };
+          reader.readAsDataURL(file); // Read the file as a Data URL
+        } else {
+          preview.src = ""; // Reset the preview if no file is selected
+          preview.style.display = "none";
+        }
+      });
+
+    // Preview for CV
+    document.getElementById("cv").addEventListener("change", function (event) {
+      const file = event.target.files[0];
+      const cvLink = document.getElementById("cv-link");
+      const cvPreview = document.getElementById("cv-preview");
+
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          cvLink.href = e.target.result; // Set the href of the link to the result of the FileReader
+          cvPreview.style.display = "block"; // Show the CV link
+          cvLink.innerText = file.name; // Show the name of the uploaded CV
+        };
+        reader.readAsDataURL(file); // Read the file as a Data URL
+      } else {
+        cvLink.href = ""; // Reset the link if no file is selected
+        cvPreview.style.display = "none";
+      }
+    });
+  });
+</script>

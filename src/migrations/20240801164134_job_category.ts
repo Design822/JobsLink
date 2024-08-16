@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table
       .enum("view", ["accepted", "rejected", "pending"])
       .defaultTo("pending");
+    table.string("post");
     table.integer("job_id").unsigned();
     table.integer("user_id").unsigned();
     table

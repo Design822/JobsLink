@@ -34,7 +34,13 @@ const getAppliedSeekerByJobID = async (
 const applyForJob = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.params.addJob_id;
-    const { user_id, view } = req.body;
+    const { user_id, view, post } = req.body;
+
+    if (!post) {
+      return res
+        .status(400)
+        .json(responder(false, "Please add post you are applying for"));
+    }
 
     const addJob = await db("addJob").where({ id: id }).first();
     if (addJob) {
@@ -42,6 +48,7 @@ const applyForJob = async (req: Request, res: Response, next: NextFunction) => {
         job_id: id,
         user_id,
         view,
+        post,
       });
       return res.status(200).json(responder(true, `Job applied sucessfully`));
     } else {
@@ -61,13 +68,14 @@ const updatedViewBySeekerID = async (
 ) => {
   try {
     const id = req.params.job_seeker_id;
-    const { view } = req.body;
+    const { view, post } = req.body;
     const jobSeeker = await db("apply").where({ user_id: id }).first();
     if (jobSeeker) {
       await db("apply")
         .where({ user_id: id })
         .update({
           view: view || jobSeeker.view,
+          post: post || jobSeeker.post,
         });
       return res
         .status(202)
