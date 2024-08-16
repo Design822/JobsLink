@@ -38,6 +38,10 @@ app.get("/employee_login", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/employee_login.html"));
 });
 
+// job seeker
+app.get("/job_seekers_reg", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/job_seekers_reg.html"));
+});
 
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);
