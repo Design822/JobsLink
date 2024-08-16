@@ -201,7 +201,13 @@ const loginCompany = async (
             const token = jwt.sign({ user, role: "company" }, secret, {
               expiresIn: "1D",
             });
-            res.status(202).json({ messege: "Login sucessfully", token });
+            const { password: _, ...userData } = user;
+
+            res.status(202).json({
+              message: "Login successful",
+              token,
+              user: userData,
+            });
           }
         }
       });

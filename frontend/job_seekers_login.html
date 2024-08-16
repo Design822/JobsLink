@@ -40,12 +40,17 @@
                 // Handle errors (e.g., display an error message to the user)
                 console.error('Network response was not ok:', response.statusText);
                 return;
+            }else{
+                const responseData = await response.json();
+
+                // Handle successful response (e.g., redirect the user or display a success message)
+                console.log('Login successful:', responseData.token);
+                window.location.herf='/'
+                
+                
             }
 
-            const responseData = await response.json();
-
-            // Handle successful response (e.g., redirect the user or display a success message)
-            console.log('Login successful:', responseData);
+            
         });
     </script>
     <div id="footer-placeholder"></div>

@@ -52,9 +52,14 @@ app.get("/all_jobs", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/total_jobs.html"));
 });
 app.get("/jobs_details", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/job-details-page-job-seekers.html"));
+  res.sendFile(
+    path.join(__dirname, "../frontend/job-details-page-job-seekers.html")
+  );
 });
 
+app.get("/employee_home", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/empoyee_home.html"));
+});
 
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);

@@ -39,12 +39,19 @@
                 // Handle errors (e.g., display an error message to the user)
                 console.error('Network response was not ok:', response.statusText);
                 return;
+            }else{
+                const responseData = await response.json();
+                const { token, userData } = responseData;
+
+               
+                localStorage.setItem('authToken', responseData.token);
+            localStorage.setItem('userData', JSON.stringify(responseData.user));
+
+            console.log('Login successful:', responseData.token, responseData.user);
+                window.location.href='/employee_home'
             }
 
-            const responseData = await response.json();
-
-            // Handle successful response (e.g., redirect the user or display a success message)
-            console.log('Login successful:', responseData);
+           
         });
     </script>
     <div id="footer-placeholder"></div>
