@@ -88,7 +88,6 @@ const updatejob = async (req: Request, res: Response, next: NextFunction) => {
       const exits = await db("addJob").where({ id }).first();
       if (exits) {
         const {
-          title,
           position,
           no_of_vacancies,
           salary,
@@ -104,7 +103,6 @@ const updatejob = async (req: Request, res: Response, next: NextFunction) => {
           category_id,
         } = req.body;
         await db("addJob").where({ id }).update({
-          title,
           job_description,
           job_summary,
           time,
@@ -160,7 +158,6 @@ const addJob = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const company_id = req.params.company_id;
     const {
-      title,
       position,
       no_of_vacancies,
       salary,
@@ -177,9 +174,6 @@ const addJob = async (req: Request, res: Response, next: NextFunction) => {
     } = req.body;
     const company = await db("company").where("id", company_id).first();
     if (company) {
-      if (!title) {
-        return res.status(400).json(responder(false, "Title is missing"));
-      }
       if (!position) {
         return res.status(400).json(responder(false, "Position is missing"));
       }
@@ -233,7 +227,6 @@ const addJob = async (req: Request, res: Response, next: NextFunction) => {
       }
 
       await db("addJob").insert({
-        title,
         job_description,
         job_summary,
         time,

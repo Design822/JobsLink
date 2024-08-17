@@ -63,60 +63,62 @@
     
     <div class="post-job-container">
         <h2>Post your job</h2>
-        <form class="post-job-form">
+        <form id="postJob">
             <div class="form-group">
                 <label for="position">Position</label>
-                <input type="text" id="position" placeholder="Position">
+                <input type="text" id="position" name="position" placeholder="Position">
             </div>
             <div class="form-group">
-                <label for="vacancies">No. of Vacancies</label>
-                <input type="number" id="vacancies" placeholder="No. of Vacancies">
+                <label for="no_of_vacancies">No. of Vacancies</label>
+                <input type="text" id="no_of_vacancies" name="no_of_vacancies" placeholder="No. of Vacancies">
                 <label for="required-field">Required Field</label>
-                <select id="required-field">
-                    <option value="" disabled selected>Required Field</option>
-                    <option value="IT">IT</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Finance">Finance</option>
-                    <option value="Engineering">Engineering</option>
-                    <option value="HR">HR</option>
-                    <option value="Other">Other</option>
-                </select>
+                <select id="required-field" name="category_id">
+                <option value="" disabled selected>Required Field</option>
+            </select>
             </div>
             <div class="form-group">
                 <label for="salary">Salary</label>
-                <input type="text" id="salary" placeholder="Salary">
-                <label for="job-type">Job Type</label>
-                <input type="text" id="job-type" placeholder="Job Type">
+                <input type="text" id="salary" name="salary" placeholder="Salary">
             </div>
             <div class="form-group">
                 <label for="posted-date">Posted Date</label>
-                <input type="date" id="posted-date" placeholder="Posted Date">
+                <input type="date" id="starting_date" name="starting_date" placeholder="Posted Date">
                 <label for="last-date">Last Date</label>
-                <input type="date" id="last-date" placeholder="Last Date">
+                <input type="date" id="ending_date" name="ending_date" placeholder="Last Date">
             </div>
             <div class="form-group">
-                <label for="gender-required">Gender Required</label>
-                <select id="gender-required">
+                <label for="gender">Gender Required</label>
+                <select id="gender" name="gender">
                     <option value="" disabled selected>Gender Required</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Male & Female">Male & Female</option>
-                    <option value="Others">Others</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="both">Male & Female</option>
+                    <option value="others">Others</option>
                 </select>
-                <label for="education-required">Education Required</label>
-                <input type="text" id="education-required" placeholder="Education Required">
+                
+                <label for="education_required">Education Required</label>
+                <input type="text" id="education_required" name="education_required" placeholder="Education Required">
             </div>
             <div class="form-group">
-                <label for="job-summary">Job Summary</label>
-                <textarea id="job-summary" placeholder="Job Summary"></textarea>
+                <label for="time">Job Type</label>
+                <select id="time" name="time">
+                    <option value="" disabled selected>Job Type</option>
+                    <option value="fulltime">Fulltime</option>
+                    <option value="parttime">Parttime</option>
+                    <option value="contract">Contract</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="job-description">Job Description</label>
-                <textarea id="job-description" placeholder="Job Description"></textarea>
+                <label for="job_summary">Job Summary</label>
+                <textarea id="job_summary" name="job_summary" placeholder="Job Summary"></textarea>
             </div>
             <div class="form-group">
-                <label for="key-skills">Key Skills</label>
-                <input type="text" id="key-skills" placeholder="Key Skills">
+                <label for="job_description">Job Description</label>
+                <textarea id="job_description" name="job_description" placeholder="Job Description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="skills">Key Skills</label>
+                <input type="text" id="skills" name="skills" placeholder="Key Skills">
                 <!-- <label class="custom-file-upload">
                     <input type="file">
                     Company Logo
@@ -130,6 +132,61 @@
     
     
     <br><br><br><br><br>
+    <script>
+      function fetchCategories() {
+    fetch('/category')
+        .then(response => response.json())
+        .then(response => {
+            const categories = response.data; // Access the 'data' array
+            const requiredFieldSelect = document.getElementById('required-field');
+
+            // Clear any existing options except the first one
+            while (requiredFieldSelect.options.length > 1) {
+                requiredFieldSelect.remove(1);
+            }
+
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id; // Use the category ID as the value
+                option.textContent = category.category_name;
+                requiredFieldSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+        });
+}
+
+// Call the function to fetch categories on page load
+document.addEventListener('DOMContentLoaded', fetchCategories);
+        
+        // Handle form submission
+        document.getElementById('postJob').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+        
+            try {
+                const response = await fetch('/company/add/1', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+        
+                if (response.ok) {
+                    alert('Job posted successfully!');
+                    // Optionally, you can redirect or clear the form here
+                } else {
+                    alert('Failed to post job.');
+                }
+            } catch (error) {
+                console.error('Error posting job:', error);
+            }
+        });
+        </script>
     <footer class="footer-section">
         <div class="container">
             <div class="footer-cta pt-5 pb-5">

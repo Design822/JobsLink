@@ -57,6 +57,10 @@ app.get("/jobs_details", (req, res) => {
   );
 });
 
+app.get("/post_job", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/post-your-company-job.html"));
+});
+
 app.get("/employee_home", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/empoyee_home.html"));
 });
