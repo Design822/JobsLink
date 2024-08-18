@@ -141,20 +141,12 @@ const registerJobSeeker = async (
       contact_number,
       email_address,
       gender,
-      post,
       conformPassword,
       password,
     } = req.body;
     const profilePic = req.files.profile_pic.map((file: any) => file.filename);
     const cv = req.files.cv.map((file: any) => file.filename);
 
-    if (!post) {
-      return res
-        .status(400)
-        .json(
-          responder(false, `Please write which postion you are applying for`)
-        );
-    }
     if (!gender) {
       return res.status(400).json(responder(false, `Please select gender`));
     }
@@ -208,7 +200,6 @@ const registerJobSeeker = async (
         last_name,
         contact_number,
         address,
-        post,
         gender,
         email_address,
         password: hashedPassword,
@@ -218,7 +209,7 @@ const registerJobSeeker = async (
       .then(() => {
         return res
           .status(201)
-          .json(responder(true, "Your have been register sucessfully"));
+          .json(responder(true, "You have been register sucessfully"));
       })
       .catch((error) => {
         errorLog(error, res, next);
@@ -256,7 +247,13 @@ const loginJobSeeker = async (
             const token = jwt.sign({ user, role: "job_seeker" }, secret, {
               expiresIn: "1D",
             });
-            res.status(202).json({ messege: "Login sucessfully", token });
+            const { password: _, ...userData } = user;
+
+            res.status(202).json({
+              message: "Login successful",
+              token,
+              user: userData,
+            });
           }
         }
       });
