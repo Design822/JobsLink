@@ -52,11 +52,8 @@ app.get("/all_jobs", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/total_jobs.html"));
 });
 app.get("/jobs_details", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../frontend/job-details-page-job-seekers.html")
-  );
+  res.sendFile(path.join(__dirname, "../frontend/job-details-page-job-seekers.html"));
 });
-
 app.get("/post_job", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/post-your-company-job.html"));
 });
