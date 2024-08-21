@@ -346,17 +346,6 @@
                 }
             }
 
-            // Infinite scroll functionality
-            const scrollWrapper = document.getElementById('manpower-cards');
-            if (scrollWrapper) {
-                const cards = Array.from(scrollWrapper.children);
-                // Clone the cards to create an infinite scroll effect
-                cards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    scrollWrapper.appendChild(clone);
-                });
-            }
-
             // Image card click functionality
             const imgCard = document.querySelectorAll(".img-card");
             imgCard.forEach(element => {
@@ -367,6 +356,29 @@
                     element.classList.add("active");
                 });
             });
+            const scrollWrapper = document.querySelector('.top-hiring-manpowers .manpower-cards');
+            if (scrollWrapper) {
+                const cards = Array.from(scrollWrapper.children);
+                cards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    scrollWrapper.appendChild(clone);
+                });
+            }
+
+            // Fetch token and user data from localStorage
+            const authToken = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('userData');
+
+            console.log('Auth Token from localStorage:', authToken); // Log the token
+            console.log('User Data from localStorage:', userData); // Log the user data
+
+            if (authToken && userData) {
+                // Parse and log user data if it exists
+                const parsedUserData = JSON.parse(userData);
+                console.log('User is logged in:', parsedUserData);
+
+            }
+        
         });
     </script>
 </body>
