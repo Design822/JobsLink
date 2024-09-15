@@ -1,6 +1,6 @@
 <div id="header-placeholder"></div>
     <br><br><br><br><br><br><br><br>
-    
+
     <div class="login-container">
         <a href="empoyee_home.html"><h2>Login as a Employee</h2></a>
         <img src="images/login_seekers.png" alt="Job Seeker Illustration">
@@ -11,7 +11,7 @@
         </form>
         <a href="/employee_reg">New here? <span>Register</span></a>
     </div>
-    
+
     <br><br>
     <script>
         const form = document.getElementById('employeeLoginFrom');
@@ -43,15 +43,15 @@
                 const responseData = await response.json();
                 const { token, userData } = responseData;
 
-               
+
                 localStorage.setItem('authToken', responseData.token);
             localStorage.setItem('userData', JSON.stringify(responseData.user));
 
             console.log('Login successful:', responseData.token, responseData.user);
-                window.location.href='/'
+                window.location.href='/employee_home'
             }
 
-           
+
         });
     </script>
     <div id="footer-placeholder"></div>

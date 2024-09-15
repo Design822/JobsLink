@@ -61,6 +61,10 @@ app.get("/post_job", (req: any, res: any) => {
 app.get("/employee_home", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/empoyee_home.html"));
 });
+app.get("/total_companies", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/total_companies.html"));
+});
+
 
 app.use("/category", categoryRoute);
 app.use("/company", companyRoute);
