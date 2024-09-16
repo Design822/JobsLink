@@ -64,6 +64,9 @@ app.get("/employee_home", (req: any, res: any) => {
 app.get("/total_companies", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/total_companies.html"));
 });
+app.get("/create_your_cv", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/job_seekers_create_your_cv.html"));
+});
 
 
 app.use("/category", categoryRoute);
