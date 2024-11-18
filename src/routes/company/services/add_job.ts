@@ -7,12 +7,12 @@ const getJobs = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id: any = req.query.id;
     if (id > 0) {
-      const getJobByID = await db("addJob")
-        .where("addJob.id", id)
-        .join("category", "addJob.category_id", "category.id")
-        .leftJoin("company", "addJob.company_id", "company.id")
+      const getJobByID = await db("add_job")
+        .where("add_job.id", id)
+        .join("category", "add_job.category_id", "category.id")
+        .leftJoin("company", "add_job.company_id", "company.id")
         .select(
-          "addJob.*",
+          "add_job.*",
           "category.category_name",
           "category.accepted",
           "company.name_of_company",
@@ -33,11 +33,11 @@ const getJobs = async (req: Request, res: Response, next: NextFunction) => {
       //!for admin
     }
     if (id == 0) {
-      const getAllJob = await db("addJob")
-        .join("category", "addJob.category_id", "category.id")
-        .leftJoin("company", "addJob.company_id", "company.id")
+      const getAllJob = await db("add_job")
+        .join("category", "add_job.category_id", "category.id")
+        .leftJoin("company", "add_job.company_id", "company.id")
         .select(
-          "addJob.*",
+          "add_job.*",
           "category.category_name",
           "category.accepted",
           "company.name_of_company",
@@ -53,12 +53,12 @@ const getJobs = async (req: Request, res: Response, next: NextFunction) => {
     }
     //! for user
     if (!id) {
-      const getAllJobForUser = await db("addJob")
+      const getAllJobForUser = await db("add_job")
         .where("verify", true)
-        .join("category", "addJob.category_id", "category.id")
-        .leftJoin("company", "addJob.company_id", "company.id")
+        .join("category", "add_job.category_id", "category.id")
+        .leftJoin("company", "add_job.company_id", "company.id")
         .select(
-          "addJob.*",
+          "add_job.*",
           "category.category_name",
           "category.accepted",
           "company.name_of_company",
@@ -85,7 +85,7 @@ const updatejob = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.query.id;
     if (id) {
-      const exits = await db("addJob").where({ id }).first();
+      const exits = await db("add_job").where({ id }).first();
       if (exits) {
         const {
           position,
@@ -102,7 +102,7 @@ const updatejob = async (req: Request, res: Response, next: NextFunction) => {
           verify,
           category_id,
         } = req.body;
-        await db("addJob").where({ id }).update({
+        await db("add_job").where({ id }).update({
           job_description,
           job_summary,
           time,
@@ -138,9 +138,9 @@ const updatejob = async (req: Request, res: Response, next: NextFunction) => {
 const deleteJob = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const id = req.query.id;
-    const exist = await db("addJob").where({ id }).first();
+    const exist = await db("add_job").where({ id }).first();
     if (exist) {
-      await db("addJob").where({ id }).del();
+      await db("add_job").where({ id }).del();
       return res
         .status(202)
         .json(responder(true, `Job deleted sucessfully on id ${id}`));
@@ -154,7 +154,7 @@ const deleteJob = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const addJob = async (req: Request, res: Response, next: NextFunction) => {
+const add_job = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const company_id = req.params.company_id;
     const {
@@ -226,7 +226,7 @@ const addJob = async (req: Request, res: Response, next: NextFunction) => {
           .json(responder(false, "category field is missing"));
       }
 
-      await db("addJob").insert({
+      await db("add_job").insert({
         job_description,
         job_summary,
         time,
@@ -262,12 +262,12 @@ const getJobsByCompanyID = async (
     const company_id = req.params.company_id;
     const company = await db("company").where({ id: company_id }).first();
     if (company) {
-      const jobs = await db("addJob")
+      const jobs = await db("add_job")
         .where({ company_id: company_id })
-        .join("category", "addJob.category_id", "category.id")
-        .leftJoin("company", "addJob.company_id", "company.id")
+        .join("category", "add_job.category_id", "category.id")
+        .leftJoin("company", "add_job.company_id", "company.id")
         .select(
-          "addJob.*",
+          "add_job.*",
           "category.category_name",
           "category.accepted",
           "company.name_of_company",
@@ -285,4 +285,4 @@ const getJobsByCompanyID = async (
     errorLog(error, res, next);
   }
 };
-export { getJobs, updatejob, addJob, deleteJob, getJobsByCompanyID };
+export { getJobs, updatejob, add_job, deleteJob, getJobsByCompanyID };

@@ -8,12 +8,12 @@ const getAppliedSeekerByJobID = async (
   next: NextFunction
 ) => {
   try {
-    const id = req.params.addJob_id;
-    const addJob = await db("addJob").where({ id: id }).first();
-    if (addJob) {
+    const id = req.params.add_job_id;
+    const add_job = await db("add_job").where({ id: id }).first();
+    if (add_job) {
       const getAllJobSeekers = await db("apply")
         .where({ job_id: id })
-        .join("addJob", "apply.job_id", "addJob.id")
+        .join("add_job", "apply.job_id", "add_job.id")
         .leftJoin("job_seeker", "apply.user_id", "job_seeker.id")
         .select("job_seeker.*", "view")
         .distinct();
@@ -33,7 +33,7 @@ const getAppliedSeekerByJobID = async (
 
 const applyForJob = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const id = req.params.addJob_id;
+    const id = req.params.add_job_id;
     const { user_id, view, post } = req.body;
 
     if (!post) {
@@ -42,8 +42,8 @@ const applyForJob = async (req: Request, res: Response, next: NextFunction) => {
         .json(responder(false, "Please add post you are applying for"));
     }
 
-    const addJob = await db("addJob").where({ id: id }).first();
-    if (addJob) {
+    const add_job = await db("add_job").where({ id: id }).first();
+    if (add_job) {
       await db("apply").insert({
         job_id: id,
         user_id,

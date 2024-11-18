@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<void> {
     table
       .foreign("job_id")
       .references("id")
-      .inTable("addJob")
+      .inTable("add_job")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
     table
