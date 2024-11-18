@@ -121,7 +121,7 @@
             <div class="category-item"><i class="fa-solid fa-arrow-up-right-from-square"></i>View More...</div>
         </div>
     </section>
-
+<!-- ------------------------------------------------------------------------------------ top jobs by vaccany ------------------------------------------------------------------------- -->
     <br><br><br>
     <section class="jobs">
         <h2>Top Jobs</h2>
@@ -169,8 +169,8 @@
                                         jobItem.classList.add('job-item');
                 
                                         jobItem.innerHTML = `
-                                            <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo"> <!-- Add alt attribute for accessibility -->
-                                            <h3>${job.title}</h3>
+                                            <img src="${job.filename || 'images/placeholder.png'}" alt="${job.name_of_company} logo" class="job-logo"> <!-- Add alt attribute for accessibility -->
+                                            <h3>${job.name_of_company}</h3>
                                             <p><strong>Position:</strong> ${job.position}</p>
                                             <p><strong>Category: </strong>${job.category_name}</p>
                                             <p><strong>Vacancies:</strong> ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->
@@ -197,6 +197,7 @@
         </div>
     </section>
     <br><br><br><br><br>
+    <!-- ------------------------------------------------------------------------------------ feature jobs by expire date ------------------------------------------------------------------------->
     <section class="jobs-feature">
         <h2>Feature Jobs</h2>
         <br><br>
@@ -246,7 +247,7 @@
                                     // Add an ID attribute for linking to job details
                                     jobItemFeature.innerHTML = `
                                         <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo">
-                                        <h3>${job.title}</h3>
+                                        <h3>${job.name_of_company}</h3>
                                         <p><strong>Position:</strong> ${job.position}</p>
                                         <p><strong>Category:</strong> ${job.category_name}</p>
                                         <p><strong>Vacancies:</strong> ${job.no_of_vacancies}</p>
@@ -272,7 +273,7 @@
             <a href="/all_jobs" class="view-more-button">View More Jobs</a>
         </div>        
     </section>
-    
+    <!-- ------------------------------------------------------------------------------------ news & articles ------------------------------------------------------------------------->
     <br><br><br><br><br>
     <section class="articles">
         <h2>Important Articles</h2>

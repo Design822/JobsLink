@@ -12,7 +12,7 @@ const config: { [key: string]: Knex.Config } = {
       // user: process.env.DB_USER || "postgres",
       // password: process.env.DB_PASSWORD || "paras03",
       database: process.env.DB_NAME || "job_portal",
-      user: process.env.DB_USER || "pg",
+      user: process.env.DB_USER || "postgres",
       password: process.env.DB_PASSWORD || "976747",
       port: Number(process.env.DB_PORT) || 5432,
     },

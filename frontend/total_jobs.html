@@ -105,8 +105,8 @@
                                     jobItemTotal.classList.add('job-item-total');
     
                                     jobItemTotal.innerHTML = `
-                                        <img src="${job.filename || 'images/placeholder.png'}" alt="${job.title} logo" class="job-logo">
-                                        <h3>${job.title}</h3>
+                                        <img src="${job.filename || 'images/placeholder.png'}" alt="${job.name_of_company} logo" class="job-logo">
+                                        <h3>${job.name_of_company}</h3>
                                         <p><strong>Position: </strong>${job.position}</p>
                                         <p><strong>Category:</strong> ${job.category_name}</p>
                                         <p><strong>Vacancies:</strong> ${job.no_of_vacancies}</p> <!-- Display the number of vacancies -->

@@ -56,6 +56,19 @@ app.get("/jobs_details", (req, res) => {
     path.join(__dirname, "../frontend/job-details-page-job-seekers.html")
   );
 });
+app.get("/post_job", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/post-your-company-job.html"));
+});
+
+app.get("/employee_home", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/empoyee_home.html"));
+});
+app.get("/total_companies", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/total_companies.html"));
+});
+app.get("/create_your_cv", (req: any, res: any) => {
+  res.sendFile(path.join(__dirname, "../frontend/job_seekers_create_your_cv.html"));
+});
 
 app.get("/post_job", (req: any, res: any) => {
   res.sendFile(path.join(__dirname, "../frontend/post-your-company-job.html"));
